@@ -17,10 +17,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import game.display.Defeat;
-import game.display.StartGame;
-import game.display.Victory;
-import game.objects.Barrel;
+import game.giaodien.Defeat;
+import game.giaodien.StartGame;
+import game.giaodien.Victory;
 import game.objects.Bullet;
 import game.objects.Character;
 import game.objects.Enemy;
@@ -29,10 +28,14 @@ import game.objects.Path;
 import game.objects.Player;
 import game.objects.River;
 import game.objects.Rock;
+import game.objects.Thung;
 import game.objects.Tree;
 
 public class GAME extends JFrame implements  Runnable, KeyListener {
 	
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = -5713217835493723131L;
 	private Thread loop;
 	private JPanel jpanel;
@@ -44,7 +47,7 @@ public class GAME extends JFrame implements  Runnable, KeyListener {
 	private ArrayList<Tree> trees;
 	private ArrayList<Path> paths;
 	private ArrayList<River> river;
-	private ArrayList<Barrel> thung;
+	private ArrayList<Thung> thung;
 	private Bullet[] bullets;
 	private int currentBullet = 0;
 	private OpenDoor door;
@@ -116,7 +119,7 @@ public class GAME extends JFrame implements  Runnable, KeyListener {
 		trees = new ArrayList<Tree>();
 		paths = new ArrayList<Path>();
 		river = new ArrayList<River>();
-		thung =new ArrayList<Barrel>();
+		thung =new ArrayList<Thung>();
 		door = new OpenDoor(600,680);
 		bullets = new Bullet[50];
 		for (int i = 0; i < 50; i++) {
@@ -175,7 +178,7 @@ public class GAME extends JFrame implements  Runnable, KeyListener {
 		trees = new ArrayList<Tree>();
 		paths = new ArrayList<Path>();
 		river = new ArrayList<River>();
-		thung = new ArrayList<Barrel>();
+		thung = new ArrayList<Thung>();
 		bullets = new Bullet[50];
 		for (int i = 0; i < 50; i++) {
 			bullets[i] = new Bullet();
@@ -242,7 +245,7 @@ public class GAME extends JFrame implements  Runnable, KeyListener {
 		trees = new ArrayList<Tree>();
 		paths = new ArrayList<Path>();
 		river = new ArrayList<River>();
-		thung = new ArrayList<Barrel>();
+		thung = new ArrayList<Thung>();
 		bullets = new Bullet[50];
 		for (int i = 0; i < 50; i++) {
 			bullets[i] = new Bullet();
@@ -331,7 +334,7 @@ public class GAME extends JFrame implements  Runnable, KeyListener {
 	        		  paths.add(new Path(i*40,j*40));
 	        	  }
 	        	  if(test[i].contentEquals("1")) {
-	        		  thung.add(new Barrel(i*40,j*40,2));
+	        		  thung.add(new Thung(i*40,j*40,2));
 	        		  paths.add(new Path(i*40,j*40));
 	        	  }
 	        	
@@ -437,7 +440,7 @@ public class GAME extends JFrame implements  Runnable, KeyListener {
 			}
 		}
 		
-		for (Barrel th : thung) {
+		for (Thung th : thung) {
 			if(th.isVisible()) {
 				g2d.drawImage(th.getImage(), th.getX(), th.getY(), this);
 			}
@@ -613,7 +616,7 @@ public class GAME extends JFrame implements  Runnable, KeyListener {
 				}	
 				
 				// va cham voi thung
-				for (Barrel th : thung) {
+				for (Thung th : thung) {
 					if (th.isVisible()) {
 						if (th.getBounds().contains(b.getX(), b.getY()) ) 
 						{
@@ -716,7 +719,7 @@ public class GAME extends JFrame implements  Runnable, KeyListener {
 				if (c.getFlagY()  + 40  > 700) return false;
 				
 				// kiem tra cac vat can
-				for (Barrel th : thung) {
+				for (Thung th : thung) {
 					if (th.isVisible()) {
 						if (c.getFlagY() + 40 == th.getY() && c.getFlagX() == th.getX() ||
 							c.getFlagY() + 40 == th.getY() && c.getFlagX() + 20 == th.getX() ||
@@ -753,7 +756,7 @@ public class GAME extends JFrame implements  Runnable, KeyListener {
 				// cham dinh ban do
 				if (c.getFlagY() - 20 < 40) return false;
 				// kiem tra vat can
-				for (Barrel th : thung) {
+				for (Thung th : thung) {
 					if (th.isVisible())
 						if (c.getFlagY() - 40 == th.getY() && c.getFlagX() == th.getX() ||
 							c.getFlagY() - 40 == th.getY() && c.getFlagX() + 20 == th.getX() ||
@@ -789,7 +792,7 @@ public class GAME extends JFrame implements  Runnable, KeyListener {
 				// cham mep trai ban do
 				if (c.getFlagX() - 20 < 0) return false;
 				// kiem tra vat can
-				for (Barrel th : thung) {
+				for (Thung th : thung) {
 					if (th.isVisible())
 						if (c.getFlagY() == th.getY() && c.getFlagX() - 40 == th.getX() ||
 							c.getFlagY() + 20 == th.getY() && c.getFlagX() - 40 == th.getX() ||
@@ -825,7 +828,7 @@ public class GAME extends JFrame implements  Runnable, KeyListener {
 				// cham mep phai ban do
 				if (c.getFlagX() + 20 > 760) return false;
 				// kiem tra vat can
-				for (Barrel th : thung) {
+				for (Thung th : thung) {
 					if (th.isVisible())
 						if (c.getFlagY() == th.getY() && c.getFlagX() + 40 == th.getX() ||
 							c.getFlagY() + 20 == th.getY() && c.getFlagX() + 40 == th.getX() ||
